@@ -1,0 +1,71 @@
+
+Matriz que guarda la información del tablero resuelto:
+	En principio es en blanco y negro(0=vacía;1=llena)
+	Si al final lo hago a color cada numero es un color(hasta 8 supongo)9=casilla con x
+Matriz con el tablero que va haciendo el jugador
+	Al principio estará llena de 0
+
+Método para comparar ambas matrices 
+
+Listas para guardar la info de las filas y columnas
+Input de teclado para que el jugador se mueva por las fichas sin salirse del tablero y ponga lo que necesite:
+	Solo puede moverse por las casillas que corresponden a la matriz
+	En el caso blanco y negro, el jugador puede poner(9=casilla vacía, 1=casilla llena)
+
+Para filas y columnas voy a crear dos matrices con n de filas y dimendsion como n columnas
+
+Un archivo para cada nivel con la información:(no se si poner lo de filas columnas o ponerlas directamente)
+"(n. filas/ columnas) 10
+
+"filas"
+	0 0 0 1 0 1 0 0 0 0;
+	1 1 0 2 3 1 3 4 0 1;
+	1 1 10 2 1 1 1 2 10 1;
+"columnas"
+	0 1 0 0 0 0 0 1 0 0;
+	0 1 1 2 1 1 2 1 2 0;
+	7 4 7 2 1 1 1 1 3 7;
+"solución"
+	0 0 1 0 0 0 0 1 0 0
+	0 0 0 1 0 0 1 0 0 0
+	1 1 1 1 1 1 1 1 1 1
+	1 0 1 1 0 0 0 0 1 1
+	1 1 1 0 0 0 0 0 0 1
+	1 0 1 0 0 0 0 0 0 1
+	1 1 1 0 0 0 0 0 0 1
+	1 1 1 1 0 0 0 0 1 1
+	1 1 1 1 1 1 1 1 1 1
+	0 1 0 0 0 0 0 0 1 0
+
+Idea de diseño en pantalla:
+         ||   | 1 |   |   |   |   |   | 1 |   |   |
+         ||---+---+---+---+---+---+---+---+---+---|
+         ||   | 1 | 1 | 3 | 1 | 1 | 2 | 1 | 2 |   |
+         ||---+---+---+---+---+---+---+---+---+---|
+         || 7 | 4 | 7 | 2 | 1 | 1 | 1 | 1 | 3 | 7 |
+---------||---------------------------------------|
+---------||---------------------------------------|
+   | 1| 1||   |   | O |   |   |   |   | O |   |   |
+---------||---+---+---+---+---+---+---+---+---+---|
+   | 1| 1||   |   |   | O |   |   | O |   |   |   |
+---------||---+---+---+---+---+---+---+---+---+---|
+   |  |10|| O | O | O | O | O | O | O | O | O | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+  1| 2| 2|| O |   | O | O |   |   |   |   | O | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+   | 3| 1|| O | O | O |   |   |   |   |   |   | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+  1| 1| 1|| O |   | O |   |   |   |   |   |   | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+   | 3| 1|| O | O | O |   |   |   |   |   |   | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+   | 4| 2|| O | O | O | O |   |   |   |   | O | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+   |  |10|| O | O | O | O | O | O | O | O | O | O |
+---------||---+---+---+---+---+---+---+---+---+---|
+   | 1| 1||   | O |   |   |   |   |   |   | O |   |
+---------||---------------------------------------|
+
+Las casillas rellenadas serán espacios con el color cambiado(Console.BackgroundColor(white))
+
+Para comprobar si la matriz está correcta tengo que ignorar los 0 al compararlos

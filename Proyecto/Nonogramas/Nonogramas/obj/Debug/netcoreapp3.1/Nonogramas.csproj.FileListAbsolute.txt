@@ -1,0 +1,13 @@
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\bin\Debug\netcoreapp3.1\Nonogramas.exe
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\bin\Debug\netcoreapp3.1\Nonogramas.deps.json
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\bin\Debug\netcoreapp3.1\Nonogramas.runtimeconfig.json
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\bin\Debug\netcoreapp3.1\Nonogramas.runtimeconfig.dev.json
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\bin\Debug\netcoreapp3.1\Nonogramas.dll
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\bin\Debug\netcoreapp3.1\Nonogramas.pdb
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.csprojAssemblyReference.cache
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.AssemblyInfoInputs.cache
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.AssemblyInfo.cs
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.csproj.CoreCompileInputs.cache
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.dll
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.pdb
+C:\Users\laura\Documents\Desarrollo de Videojuegos\1º\2º Cuatrimestre\FP 2\Proyecto\Nonogramas\Nonogramas\obj\Debug\netcoreapp3.1\Nonogramas.genruntimeconfig.cache

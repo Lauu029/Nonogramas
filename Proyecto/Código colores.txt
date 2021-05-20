@@ -1,0 +1,13 @@
+case "a": Amarillo
+case "b": Azul
+case "c": Rojo
+case "d": Verde
+case "e": Gris
+case "f": Cian
+case "g": Azul oscuro
+case "h": cian oscuro
+case "i": verde oscuro
+case "j": gris oscuro
+case "k": morado
+case "l": Rojo oscuro
+case "n": Negro
