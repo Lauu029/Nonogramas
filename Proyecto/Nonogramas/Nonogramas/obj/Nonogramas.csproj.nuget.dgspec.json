@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\laura\\Documents\\Desarrollo de Videojuegos\\1º\\2º Cuatrimestre\\FP 2\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj": {}
+    "C:\\Users\\laura\\Documents\\Nonogramas\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj": {}
   },
   "projects": {
-    "C:\\Users\\laura\\Documents\\Desarrollo de Videojuegos\\1º\\2º Cuatrimestre\\FP 2\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj": {
+    "C:\\Users\\laura\\Documents\\Nonogramas\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\laura\\Documents\\Desarrollo de Videojuegos\\1º\\2º Cuatrimestre\\FP 2\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj",
+        "projectUniqueName": "C:\\Users\\laura\\Documents\\Nonogramas\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj",
         "projectName": "Nonogramas",
-        "projectPath": "C:\\Users\\laura\\Documents\\Desarrollo de Videojuegos\\1º\\2º Cuatrimestre\\FP 2\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj",
+        "projectPath": "C:\\Users\\laura\\Documents\\Nonogramas\\Proyecto\\Nonogramas\\Nonogramas\\Nonogramas.csproj",
         "packagesPath": "C:\\Users\\laura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\laura\\Documents\\Desarrollo de Videojuegos\\1º\\2º Cuatrimestre\\FP 2\\Proyecto\\Nonogramas\\Nonogramas\\obj\\",
+        "outputPath": "C:\\Users\\laura\\Documents\\Nonogramas\\Proyecto\\Nonogramas\\Nonogramas\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\laura\\AppData\\Roaming\\NuGet\\NuGet.Config",
