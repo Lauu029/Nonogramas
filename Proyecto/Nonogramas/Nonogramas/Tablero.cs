@@ -12,11 +12,11 @@ namespace Nonogramas
         int[,] solucion;
 
         //Arrays de filas columnas con la información
-        Lista [] filas;
-        Lista [] columnas;
+        Lista[] filas;
+        Lista[] columnas;
         //Números que determina el tamaño de la lista más larga en columnas y en filas
-        public int longitudF=0;
-        public int longitudC=0;
+        public int longitudF = 0;
+        public int longitudC = 0;
 
         //dimensión del puzle
         public int dim;
@@ -25,8 +25,8 @@ namespace Nonogramas
         int i = 0;
         int j = 0;
 
-        int[,] resultados;
-        
+        int[,] resultadosUsuario;
+
         //método constructor
         public Tablero(string file)
         {
@@ -37,39 +37,39 @@ namespace Nonogramas
             dim = int.Parse(lectorNivel.ReadLine());
             //Establezco la 
             //lector de las líneas
-            string leeLineas="";
+            string leeLineas = "";
             //String inicial donde guardo la info que va leyendo de filas y columnas
             string info = "";
-            
-            
-            while (leeLineas != ";") 
+
+
+            while (leeLineas != ";")
             {
                 leeLineas = lectorNivel.ReadLine().Replace(" ", ",").Trim();
-                if (leeLineas != ";"&&leeLineas!="")
+                if (leeLineas != ";" && leeLineas != "")
                     info += leeLineas + ";";
             }
 
             //divido el string
-            string [] arrayNivel = info.Split(";");
+            string[] arrayNivel = info.Split(";");
 
             //establezco el tamaño del array de info de filas
-            filas = new Lista [dim];
+            filas = new Lista[dim];
 
             //relleno la matriz con la info de filas
-            for (int i = 0; i < arrayNivel.Length-1; i++)
+            for (int i = 0; i < arrayNivel.Length - 1; i++)
             {
                 //string auxiliar
                 string aux = arrayNivel[i];
 
                 //array para guardar cada número de cada fila de arrayNivel
-                string [] aux2 = aux.Split(",");
+                string[] aux2 = aux.Split(",");
 
                 Lista lst = new Lista();
                 //variable para contar la longitud de las listas
                 int lng = 0;
                 for (int j = 0; j < aux2.Length; j++)
                 {
-                    
+
                     //divido el string para separar la información del color de la del número
                     string temp = aux2[j].Substring(0, 2);
                     int temp2 = int.Parse(temp);
@@ -111,18 +111,18 @@ namespace Nonogramas
                 leeLineas = lectorNivel.ReadLine().Replace(" ", ",");
                 if (leeLineas != ";" && leeLineas != "")
                     info += leeLineas + ";";
-                
+
 
             } while (leeLineas != ";");
 
-             //divido el string
-             arrayNivel = info.Split(";");
+            //divido el string
+            arrayNivel = info.Split(";");
 
             //establezco el tamaño del array de info de columnas
             columnas = new Lista[dim];
 
             //relleno la matriz con la info de columnas
-            for (int i = 0; i < arrayNivel.Length-1; i++)
+            for (int i = 0; i < arrayNivel.Length - 1; i++)
             {
                 //string auxiliar
                 string aux = arrayNivel[i];
@@ -157,7 +157,7 @@ namespace Nonogramas
                         default: color = ConsoleColor.Black; break;
                     }
                     //variable para meter los pares en la lista
-                    Lista.Pares par=new Lista.Pares();
+                    Lista.Pares par = new Lista.Pares();
                     par.color = color;
                     par.valor = temp2;
                     lst.InsertaPar(par);
@@ -176,10 +176,10 @@ namespace Nonogramas
                 if (leeLineas != ";" && leeLineas != "")
                     info += leeLineas + ";";
 
-            } while (leeLineas != ";"&& !lectorNivel.EndOfStream);
+            } while (leeLineas != ";" && !lectorNivel.EndOfStream);
 
             //divido el string
-            string [] matrizNivel = info.Split(";");
+            string[] matrizNivel = info.Split(";");
 
             //establezco el tamaño del array de info de filas
             solucion = new int[dim, dim];
@@ -199,19 +199,22 @@ namespace Nonogramas
             }
             lectorNivel.Close();
             //dimensiono la matriz de resultados
-            resultados = new int[dim, dim];
+            resultadosUsuario = new int[dim, dim];
             //la lleno de 0 para representar espacios vacíos
-            for (int i = 0; i < resultados.GetLength(0); i++)
+            for (int i = 0; i < resultadosUsuario.GetLength(0); i++)
             {
-                for (int j = 0; j < resultados.GetLength(1); j++) resultados[i, j]=0;
+                for (int j = 0; j < resultadosUsuario.GetLength(1); j++) resultadosUsuario[i, j] = 0;
             }
         }
-        public void Dibujo()
+        //Método que dibuja el tablero
+        //Le paso comprobaciones para que vaya escribiendo cuantas le quedan al jugador cada vez que comprueba el tablero
+        public void Dibujo(int comprobaciones)
         {
+            Console.Clear();
             //Ajusto el color del fondo y las letras
             Console.BackgroundColor = ConsoleColor.White;
             Console.ForegroundColor = ConsoleColor.Black;
-            
+
             //Primero dibujo todo el tablero vacío            
             for (int i = 0; i < longitudC; i++)
             {
@@ -225,7 +228,7 @@ namespace Nonogramas
                 //Recorro cada posición del array y escribo espacios en todos los huecos donde irán luego los datos
                 for (int j = 0; j < dim; j++)
                     Console.Write("   |");
-                    
+
                 Console.WriteLine();
 
                 //Debajo de cada fila escribo la línea de separación, excepto en la última
@@ -251,7 +254,7 @@ namespace Nonogramas
             }
             //Al final de las filas dibujo la separación del tablero
             //Primero la separación para el dibujo de la info de las filas
-            
+
             for (int l = 0; l < filas.Length; l++)
             {
                 Console.Write("=");
@@ -267,9 +270,9 @@ namespace Nonogramas
                 else
                     Console.Write("====");
             }
-            
+
             //Dibujo del resto del tablero
-            for (int p = 0; p < resultados.GetLength(0); p++)
+            for (int p = 0; p < resultadosUsuario.GetLength(0); p++)
             {
                 //Primero escribo la info de las filas y el inicio de la fila dependiendo si dim es par o impar 
                 if (dim % 2 == 0)
@@ -285,14 +288,43 @@ namespace Nonogramas
 
                 Console.Write("|");
                 //Escribo el interior de la matriz de resultados
-                for (int r = 0; r < resultados.GetLength(1); r++)
+                for (int r = 0; r < resultadosUsuario.GetLength(1); r++)
                 {
-                    
+                    if (resultadosUsuario[p, r] == 0)
                         Console.Write("   |");
+                    else if (resultadosUsuario[p, r] != 14)
+                    {
+                        switch (resultadosUsuario[p, r])
+                        {
+                            case 2: Console.BackgroundColor = ConsoleColor.DarkYellow; break;
+                            case 3: Console.BackgroundColor = ConsoleColor.Blue; break;
+                            case 4: Console.BackgroundColor = ConsoleColor.Red; break;
+                            case 5: Console.BackgroundColor = ConsoleColor.Green; break;
+                            case 6: Console.BackgroundColor = ConsoleColor.Gray; break;
+                            case 7: Console.BackgroundColor = ConsoleColor.Cyan; break;
+                            case 8: Console.BackgroundColor = ConsoleColor.DarkBlue; break;
+                            case 9: Console.BackgroundColor = ConsoleColor.DarkCyan; break;
+                            case 10: Console.BackgroundColor = ConsoleColor.DarkGreen; break;
+                            case 11: Console.BackgroundColor = ConsoleColor.DarkGray; break;
+                            case 12: Console.BackgroundColor = ConsoleColor.DarkMagenta; break;
+                            case 13: Console.BackgroundColor = ConsoleColor.DarkRed; break;
+                            default: Console.BackgroundColor = ConsoleColor.Black; break;
+                        }
+                        Console.Write("   ");
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.Write("|");
+                    }
+                    else
+                    {
+
+                        Console.Write(" X |");
+                    }
+
+
                 }
                 Console.WriteLine();
                 //Si no es la última fila lo escribe normal
-                if (p != resultados.GetLength(0) - 1)
+                if (p != resultadosUsuario.GetLength(0) - 1)
                 {
                     //Escribo tres - por cada número de filas para las indicaciones de las filas 
                     for (int l = 0; l < longitudF; l++)
@@ -341,41 +373,40 @@ namespace Nonogramas
                     }
                 }
 
-
             }
             //Creo dos variables para la posición del cursor
             int x = dim + 3;
             int y = longitudC + (longitudC - 2);
             //Una vez tengo el tablero vacío relleno la información de filas y columnas con las listas
             Console.SetCursorPosition(x, y);
-            
+
             for (int i = 0; i < dim; i++)
             {
                 int l = y;
-                for (int j = columnas[i].LongLista()-1; j >= 0; j--)
+                for (int j = columnas[i].LongLista() - 1; j >= 0; j--)
                 {
                     Lista.Pares par = columnas[i].nEsimo(j);
                     Console.ForegroundColor = par.color;
                     Console.Write(par.valor);
-                    if(l>=2)
-                    l -= 2;
+                    if (l >= 2)
+                        l -= 2;
                     Console.SetCursorPosition(x, l);
-                    
+
                 }
                 x += 4;
                 Console.SetCursorPosition(x, y);
             }
-            x = dim-1;
-            y +=2;
+            x = dim - 1;
+            y += 2;
             //Una vez tengo el tablero vacío relleno la información de filas y columnas con las listas
             Console.SetCursorPosition(x, y);
 
             for (int i = 0; i < dim; i++)
             {
                 int l = x;
-                for (int j = filas[i].LongLista()-1; j >=0; j--)
+                for (int j = filas[i].LongLista() - 1; j >= 0; j--)
                 {
-                    
+
                     Lista.Pares par = filas[i].nEsimo(j);
                     if (par.valor > 9)
                     {
@@ -392,7 +423,8 @@ namespace Nonogramas
                 Console.SetCursorPosition(x, y);
             }
 
-            Console.SetCursorPosition(0, 2 * dim+10 );
+
+            Console.SetCursorPosition(0, 2 * dim + 10);
             Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.Write(" A ");
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -409,16 +441,14 @@ namespace Nonogramas
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" G ");
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Write(" H ");
             Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write(" I ");
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
-            Console.Write(" J ");
             Console.BackgroundColor = ConsoleColor.DarkMagenta;
-            Console.Write(" K ");
+            Console.Write(" J ");
             Console.BackgroundColor = ConsoleColor.DarkRed;
-            Console.Write(" L ");
+            Console.Write(" K ");
             Console.BackgroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Black;
@@ -426,19 +456,40 @@ namespace Nonogramas
             Console.Write(" ESPACIO ");
             Console.BackgroundColor = ConsoleColor.White;
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Black;              
-            
+            Console.ForegroundColor = ConsoleColor.Black;
+            Console.WriteLine();
+            Console.WriteLine("Pulsa Q para comprobar si tienes errores te quedan " + comprobaciones + " intentos para comprobar");
+            Console.WriteLine();
+            int filaError;
+            if (!Compara(out filaError))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Error en la fila " + filaError);
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Ningún errror de momento :)");
+                Console.ForegroundColor = ConsoleColor.Black;
+            }
         }
+        //Método que comprueba si la matriz que ha introducido el usuario es correcta
         public bool Compara(out int i)
         {
-            i=0;
+            i = 0;
             int j = 0;
             bool iguales = true;
-            while (i < solucion.GetLength(0) && iguales )
+            //Recorre la matriz de soluciones para encontrar si hay alguna diferencia entre la matriz que va metriendo el usuario
+            while (i < solucion.GetLength(0) && iguales)
             {
                 while (j < solucion.GetLength(1) && iguales)
                 {
-                    if (solucion[i, j] != resultados[i, j] && resultados[i, j] != 0)
+                    //Compara lo que ha introducido el usuario con la matriz de soluciones
+                    //Exceptua si hay espacios vacíos o x, pero si hay x donde tendría que haber color, da error
+                    if (solucion[i, j] != resultadosUsuario[i, j] && resultadosUsuario[i, j] != 0)
+                        iguales = false;
+                    else if (solucion[i, j] != 0 && resultadosUsuario[i, j] == 14)
                         iguales = false;
                     else
                         j++;
@@ -446,44 +497,45 @@ namespace Nonogramas
                 i++;
                 j = 0;
             }
+            //devuelve true si no hay ningún error
             return iguales;
-            
-            
         }
+        //Método que mueve el cursor por el tablero según la input de usuario
         public void Mueve(string c, ref int posX, ref int posY)
         {
 
             if (c == "u" && posY > 2 * longitudC)
             {
-                posY -=2;
+                posY -= 2;
                 if (i > 0) i--;
             }
-            else if (c == "d" && posY < 2 * longitudC + (2 * dim)-3)
+            else if (c == "d" && posY < 2 * longitudC + (2 * dim) - 3)
             {
-                posY +=2;
-                if (i < dim-1) i++;
+                posY += 2;
+                if (i < dim - 1) i++;
             }
-            else if(c=="l" && posX > dim + 3)
+            else if (c == "l" && posX > dim + 3)
             {
-                posX -=4;
+                posX -= 4;
                 if (j > 0) j--;
             }
-            else if(c=="r" &&posX < dim + (4 * dim) -1)
+            else if (c == "r" && posX < dim + (4 * dim) - 1)
             {
-                posX +=4;
-                if (j < dim-1) j++;
+                posX += 4;
+                if (j < dim - 1) j++;
             }
             Console.SetCursorPosition(posX, posY);
         }
+        //Método que mete el valor en la matriz de resultados y lo dibuja en panalla
         public void MeteValor(int posX, int posY, string c)
         {
             ConsoleColor colorMatriz;
             int introducido;
-            if(c!="u" && c != "d" && c != "l" && c != "r" && c!="" && c!="x" && c!=" ")
+            if (c != "u" && c != "d" && c != "l" && c != "r" && c != "" && c != "x" && c != " " && c != "q")
             {
                 introducido = int.Parse(c);
-                resultados[i, j] = introducido;
-                
+                resultadosUsuario[i, j] = introducido;
+
                 //asigna el color según el código que tengo preparado+
                 switch (c)
                 {
@@ -508,17 +560,52 @@ namespace Nonogramas
             }
             else if (c == "x")
             {
-                resultados[i, j] = 0;
+                //Identifica las x con el 14 para diferenciarlo de las casillas vacías pero tienen el mismo valor
+                resultadosUsuario[i, j] = 14;
                 Console.SetCursorPosition(posX - 1, posY);
                 Console.Write(" X ");
             }
-            else if(c==" ")
+            else if (c == " ")
             {
-                resultados[i, j] = 0;
+                resultadosUsuario[i, j] = 0;
                 Console.SetCursorPosition(posX - 1, posY);
                 Console.Write("   ");
             }
 
+        }
+        //Método que compueba si el puzle está completo y bien hecho
+        public bool Completo()
+        {
+            //Variable de control del bucle
+            bool completo = true;
+            //variables para recorrer el bucle
+            int i = 0;
+            int j;
+            while (i < solucion.GetLength(0) && completo)
+            {
+                j = 0;
+                while (j < solucion.GetLength(1) && completo)
+                {
+                    //Comparo si la solucion del jugador es igual que la solucion del puzle
+                    if (solucion[i, j] == resultadosUsuario[i, j])
+                    {
+                        j++;
+                    }
+                    //si no es igual comprueba que lo que haya no sea una x, si es asi lo cuenta como igual
+                    else if (resultadosUsuario[i, j] == 14 && solucion[i, j] == 0)
+                    {
+                        j++;
+                    }
+                    //Si no se da ninguno de esos casos, completo es false
+                    else
+                    {
+                        completo = false;
+                    }
+                }
+                i++;
+            }
+            //devuelve completo
+            return completo;
         }
     }
 }
