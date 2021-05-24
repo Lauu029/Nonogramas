@@ -458,7 +458,7 @@ namespace Nonogramas
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine();
-            Console.WriteLine("Pulsa Q para comprobar si tienes errores te quedan " + comprobaciones + " intentos para comprobar");
+            Console.WriteLine("Pulsa 'p' para comprobar si tienes errores te quedan " + comprobaciones + " intentos para comprobar");
             Console.WriteLine();
             int filaError;
             if (!Compara(out filaError))
@@ -473,6 +473,7 @@ namespace Nonogramas
                 Console.WriteLine("Ningún errror de momento :)");
                 Console.ForegroundColor = ConsoleColor.Black;
             }
+            Console.WriteLine("Pulsa 'q' para salir del juego");
         }
         //Método que comprueba si la matriz que ha introducido el usuario es correcta
         public bool Compara(out int i)
@@ -531,7 +532,7 @@ namespace Nonogramas
         {
             ConsoleColor colorMatriz;
             int introducido;
-            if (c != "u" && c != "d" && c != "l" && c != "r" && c != "" && c != "x" && c != " " && c != "q")
+            if (c != "u" && c != "d" && c != "l" && c != "r" && c != "" && c != "x" && c != " " && c != "q" && c!="p")
             {
                 introducido = int.Parse(c);
                 resultadosUsuario[i, j] = introducido;
