@@ -37,7 +37,7 @@ namespace Nonogramas
                 Console.SetCursorPosition(posX, posY);
 
                 //En cada vuelta del bucle comprueba si el puzle está completo y bien
-                while (!tab.Completo())
+                while (!tab.Completo()&&mov!="q")
                 {
                     LeeInput(out mov);//Lee la input del usuario
                     tab.Mueve(mov, ref posX, ref posY);//Mueve el cursor si el usuario lo pide
@@ -56,7 +56,6 @@ namespace Nonogramas
                 Console.SetCursorPosition(0, 4 * tab.dim);
                 Console.Write("Pulsa 'enter' para hacer otro puzle o 'q' para salir :) ");
                 LeeInput(out mov);
-                Console.ReadLine();
             }
 
         }
@@ -94,6 +93,7 @@ namespace Nonogramas
                     default: break;
                 }
             }
+            
         }
         //Menú de juego
         static void Menu(out string nivel)
