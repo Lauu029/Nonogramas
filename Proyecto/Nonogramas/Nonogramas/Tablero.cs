@@ -272,7 +272,7 @@ namespace Nonogramas
             }
 
             //Dibujo del resto del tablero
-            for (int p = 0; p < resultadosUsuario.GetLength(0); p++)
+            for (int p = 0; p < solucion.GetLength(0); p++)
             {
                 //Primero escribo la info de las filas y el inicio de la fila dependiendo si dim es par o impar 
                 if (dim % 2 == 0)
@@ -283,8 +283,26 @@ namespace Nonogramas
                 {
                     Console.Write(" ");
                 }
-                for (int q = 0; q < longitudF; q++)
-                    Console.Write("  |");
+                if (longitudF % 2 == 0)
+                {
+                    if (longitudF > 5)
+                    {
+                        for (int i = 0; i < longitudF - 1; i++)
+                            Console.Write("  |");
+                    }
+                    else
+                    {
+                        for (int i = 0; i <= longitudF ; i++)
+                            Console.Write("  |");
+                    }
+                    
+                }
+                else
+                {
+                    for (int q = 0; q < longitudF; q++)
+                        Console.Write("  |");
+                }
+                
 
                 Console.Write("|");
                 //Escribo el interior de la matriz de resultados
@@ -324,19 +342,43 @@ namespace Nonogramas
                 }
                 Console.WriteLine();
                 //Si no es la última fila lo escribe normal
-                if (p != resultadosUsuario.GetLength(0) - 1)
+                if (p != solucion.GetLength(0) - 1)
                 {
-                    //Escribo tres - por cada número de filas para las indicaciones de las filas 
-                    for (int l = 0; l < longitudF; l++)
+                    if (longitudF % 2 == 0)
                     {
-                        Console.Write("---");
+                        if (longitudF > 5)
+                        {
+                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
+                            for (int l = 0; l < longitudF-1; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
+                        else
+                        {
+                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
+                            for (int l = 0; l <= longitudF; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
                     }
+                    else
+                    {
+                        //Escribo tres - por cada número de filas para las indicaciones de las filas 
+                        for (int l = 0; l < longitudF; l++)
+                        {
+                            Console.Write("---");
+                        }
+                    }
+                    
                     //si dim es par dibuja una barra más
                     if (dim % 2 == 0)
                     {
                         Console.Write("-");
                     }
                     Console.Write("||");
+
                     //Debajo de cada fila escribo la línea de separación
                     for (int k = 0; k < dim; k++)
                     {
@@ -351,10 +393,31 @@ namespace Nonogramas
                 {
                     //En la última fila cierro el tablero
                     //Primero la separación para el dibujo de la info de las filas
-                    for (int l = 0; l < longitudF; l++)
+                    if (longitudF % 2 == 0)
                     {
-                        Console.Write("---");
+                        if (longitudF > 5)
+                        {
+                            for (int l = 0; l < longitudF-1; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
+                        else
+                        {
+                            for (int l = 0; l <= longitudF; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
                     }
+                    else
+                    {
+                        for (int l = 0; l < longitudF; l++)
+                        {
+                            Console.Write("---");
+                        }
+                    }
+                    
                     //si dim es par dibuja una barra más
                     if (dim % 2 == 0)
                     {
