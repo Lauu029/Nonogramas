@@ -9,8 +9,7 @@ namespace Nonogramas
             //Nivel que escoge el usuario
             string nivel;
             
-            //Número inicial de comprobaciones del usuario
-            int comprobaciones = 4;
+            
             //Crea un tablero según el nivel que se le pida
             
             
@@ -26,7 +25,8 @@ namespace Nonogramas
                 Menu(out nivel);
                 nivel += ".txt";
                 Tablero tab = new Tablero(nivel);//crea el puzle leyendo del archivo lo que se le pide
-
+                //Número inicial de comprobaciones del usuario; se resetea para cada puzle
+                int comprobaciones = 4;
                 //Dibujo inicial del tablero
                 tab.Dibujo(comprobaciones);
 
@@ -53,6 +53,8 @@ namespace Nonogramas
                         tab.Dibujo(comprobaciones);
                     }
                 }
+                //pequeño retardo para que el usuario vea lo que ha hecho
+                System.Threading.Thread.Sleep(500);
                 Console.SetCursorPosition(0, 4 * tab.dim);
                 Console.Write("Pulsa 'enter' para hacer otro puzle o 'q' para salir :) ");
                 LeeInput(out mov);
@@ -80,11 +82,11 @@ namespace Nonogramas
                     case "E": c = "6"; break;
                     case "F": c = "7"; break;
                     case "G": c = "8"; break;
-                    case "H": c = "10"; break;
-                    case "I": c = "11"; break;
-                    case "J": c = "12"; break;
-                    case "K": c = "13"; break;
-                    case "L": c = "14"; break;
+                    case "H": c = "9"; break;
+                    case "I": c = "10"; break;
+                    case "J": c = "11"; break;
+                    case "K": c = "12"; break;
+                    case "L": c = "13"; break;
                     case "X": c = "x"; break;
                     case "Spacebar": c = "1"; break;
                     case "Enter": c = " "; break;

@@ -518,14 +518,16 @@ namespace Nonogramas
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.Write(" G ");
-            Console.BackgroundColor = ConsoleColor.DarkGreen;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
             Console.Write(" H ");
-            Console.BackgroundColor = ConsoleColor.DarkGray;
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
             Console.Write(" I ");
-            Console.BackgroundColor = ConsoleColor.DarkMagenta;
+            Console.BackgroundColor = ConsoleColor.DarkGray;
             Console.Write(" J ");
-            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.BackgroundColor = ConsoleColor.DarkMagenta;
             Console.Write(" K ");
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+            Console.Write(" L ");
             Console.BackgroundColor = ConsoleColor.White;
             Console.WriteLine();
             Console.BackgroundColor = ConsoleColor.Black;
@@ -535,7 +537,7 @@ namespace Nonogramas
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Black;
             Console.WriteLine();
-            Console.WriteLine("Pulsa 'p' para comprobar si tienes errores te quedan " + comprobaciones + " intentos para comprobar");
+            Console.WriteLine("Pulsa 'p' para comprobar si tienes errores; te quedan " + comprobaciones + " intentos para comprobar");
             Console.WriteLine();
             int filaError;
             if (!Compara(out filaError))
@@ -566,11 +568,11 @@ namespace Nonogramas
                 {
                     //Compara lo que ha introducido el usuario con la matriz de soluciones
                     //Exceptua si hay espacios vacíos o x, pero si hay x donde tendría que haber color, da error
-                    if (solucion[i, j] != resultadosUsuario[i, j] && resultadosUsuario[i, j] != 0)
+                    if (resultadosUsuario[i, j] != solucion[i, j] && resultadosUsuario[i, j] != 0 && resultadosUsuario[i,j]!=14)
                         iguales = false;
                     else if (solucion[i, j] != 0 && resultadosUsuario[i, j] == 14)
                         iguales = false;
-                    else
+                    else 
                         j++;
                 }
                 i++;
