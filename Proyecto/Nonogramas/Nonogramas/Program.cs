@@ -49,7 +49,7 @@ namespace Nonogramas
                     }
                 }
                 //pequeño retardo para que el usuario vea lo que ha hecho
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep(1000);
                 Console.SetCursorPosition(0, 4 * tab.dim);
                 Console.Write("Pulsa 'enter' para hacer otro puzle o 'q' para salir :) ");
                 LeeInput(out mov);
