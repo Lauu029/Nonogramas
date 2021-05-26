@@ -218,10 +218,10 @@ namespace Nonogramas
             //Primero dibujo todo el tablero vacío            
             for (int i = 0; i < longitudC; i++)
             {
-                //Escribo un espacio por cada número de filas
-                for (int l = 0; l < filas.Length; l++)
+                //Escribo tres por cada número de filas
+                for (int l = 0; l < longitudF; l++)
                 {
-                    Console.Write(" ");
+                    Console.Write("   ");
                 }
                 //Escribo el separador de filas a columnas
                 Console.Write("||");
@@ -235,9 +235,9 @@ namespace Nonogramas
                 if (i != longitudC - 1)
                 {
                     //Escribo tres espacios por cada número de filas
-                    for (int l = 0; l < filas.Length; l++)
+                    for (int l = 0; l < longitudF; l++)
                     {
-                        Console.Write(" ");
+                        Console.Write("   ");
                     }
                     //Escribo el separador correspondiente
                     Console.Write("||");
@@ -255,9 +255,9 @@ namespace Nonogramas
             //Al final de las filas dibujo la separación del tablero
             //Primero la separación para el dibujo de la info de las filas
 
-            for (int l = 0; l < filas.Length; l++)
+            for (int l = 0; l < longitudF; l++)
             {
-                Console.Write("=");
+                Console.Write("===");
             }
             //Las dos barras de separación
             Console.Write("||");
@@ -276,9 +276,9 @@ namespace Nonogramas
             {
                
                 //Escribo tres espacios por cada número de filas
-                for (int l = 0; l < filas.Length; l++)
+                for (int l = 0; l < longitudF; l++)
                 {
-                    Console.Write(" ");
+                    Console.Write("|  ");
                 }
 
                 Console.Write("||");
@@ -321,59 +321,13 @@ namespace Nonogramas
                 //Si no es la última fila lo escribe normal
                 if (p != solucion.GetLength(0) - 1)
                 {
-                    if (longitudF % 2 == 0 && dim %2 ==0)
+                    
+                    //Escribo tres - por cada número de filas para las indicaciones de las filas 
+                    for (int l = 0; l < longitudF; l++)
                     {
-                        if (longitudF < 5)
-                        {
-                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
-                            for (int l = 0; l < longitudF-1; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                        else
-                        {
-                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
-                            for (int l = 0; l <= longitudF; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                    }
-                    else if (longitudF % 2 == 0 && dim % 2 != 0)
-                    {
-                        if (longitudF > 5)
-                        {
-                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
-                            for (int l = 0; l < longitudF - 1; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                        else
-                        {
-                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
-                            for (int l = 0; l <= longitudF; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                       
-                    }
-                    else
-                    {
-                        //Escribo tres - por cada número de filas para las indicaciones de las filas 
-                        for (int l = 0; l < longitudF; l++)
-                        {
-                            Console.Write("---");
-                        }
+                        Console.Write("---");
                     }
                     
-                    //si dim es par dibuja una barra más
-                    if (dim % 2 == 0)
-                    {
-                        Console.Write("-");
-                    }
                     Console.Write("||");
 
                     //Debajo de cada fila escribo la línea de separación
@@ -390,53 +344,15 @@ namespace Nonogramas
                 {
                     //En la última fila cierro el tablero
                     //Primero la separación para el dibujo de la info de las filas
-                    if (longitudF % 2 == 0 && dim % 2 == 0)
-                    {
-                        if (longitudF < 5)
-                        {
-                            for (int l = 0; l < longitudF-1; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                        else
-                        {
-                            for (int l = 0; l <= longitudF; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                    }
-                    else if(longitudF % 2 == 0 && dim % 2 != 0)
-                    {
-                        if (longitudF > 5)
-                        {
-                            for (int l = 0; l < longitudF-1; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                        else
-                        {
-                            for (int l = 0; l <= longitudF; l++)
-                            {
-                                Console.Write("---");
-                            }
-                        }
-                    }
-                    else 
-                    {
+                    
                         for (int l = 0; l < longitudF; l++)
                         {
                             Console.Write("---");
                         }
-                    }
+                    
                     
                     //si dim es par dibuja una barra más
-                    if (dim % 2 == 0)
-                    {
-                        Console.Write("-");
-                    }
+                    
                     //Las dos barras de separación
                     Console.Write("||");
                     //Tres - para debajo de cada número
@@ -452,7 +368,7 @@ namespace Nonogramas
 
             }
             //Creo dos variables para la posición del cursor
-            int x = dim + 3;
+            int x = 3* longitudF+3;
             int y = longitudC + (longitudC - 2);
             //Una vez tengo el tablero vacío relleno la información de filas y columnas con las listas
             Console.SetCursorPosition(x, y);
@@ -473,7 +389,7 @@ namespace Nonogramas
                 x += 4;
                 Console.SetCursorPosition(x, y);
             }
-            x = dim - 1;
+            x = 3 * longitudF - 1;
             y += 2;
             //Una vez tengo el tablero vacío relleno la información de filas y columnas con las listas
             Console.SetCursorPosition(x, y);
@@ -499,9 +415,9 @@ namespace Nonogramas
                 y += 2;
                 Console.SetCursorPosition(x, y);
             }
-
+            Console.SetCursorPosition(0,2* longitudC + 2*dim +1);
             Console.ForegroundColor = ConsoleColor.Black;
-            Console.SetCursorPosition(0, 2 * dim + 10);
+            
             Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.Write(" A ");
             Console.BackgroundColor = ConsoleColor.Blue;
@@ -595,12 +511,12 @@ namespace Nonogramas
                 posY += 2;
                 if (i < dim - 1) i++;
             }
-            else if (c == "l" && posX > dim + 3)
+            else if (c == "l" && posX > 3 * longitudF + 3)
             {
                 posX -= 4;
                 if (j > 0) j--;
             }
-            else if (c == "r" && posX < dim + (4 * dim) - 1)
+            else if (c == "r" && posX < 3* longitudF + (4 * dim)-2)
             {
                 posX += 4;
                 if (j < dim - 1) j++;

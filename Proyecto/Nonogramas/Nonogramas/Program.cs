@@ -8,11 +8,6 @@ namespace Nonogramas
         {
             //Nivel que escoge el usuario
             string nivel;
-            
-            
-            //Crea un tablero según el nivel que se le pida
-            
-            
             //Variable que contendrá la input de usuario
             string mov="";
             //Variables para la posición del cursor
@@ -31,7 +26,7 @@ namespace Nonogramas
                 tab.Dibujo(comprobaciones);
 
                 //Inicializo las coordenadas en la primera casilla del tablero que corresponde a la primera posición de la matriz
-                posX = tab.dim + 3;
+                posX = 3* tab.longitudF + 3;
                 posY = 2 * tab.longitudC;
 
                 Console.SetCursorPosition(posX, posY);
