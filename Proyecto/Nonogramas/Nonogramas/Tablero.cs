@@ -218,7 +218,7 @@ namespace Nonogramas
             //Primero dibujo todo el tablero vacío            
             for (int i = 0; i < longitudC; i++)
             {
-                //Escribo tres espacios por cada número de filas
+                //Escribo un espacio por cada número de filas
                 for (int l = 0; l < filas.Length; l++)
                 {
                     Console.Write(" ");
@@ -274,37 +274,14 @@ namespace Nonogramas
             //Dibujo del resto del tablero
             for (int p = 0; p < solucion.GetLength(0); p++)
             {
-                //Primero escribo la info de las filas y el inicio de la fila dependiendo si dim es par o impar 
-                if (dim % 2 == 0)
-                {
-                    Console.Write("  ");
-                }
-                else
+               
+                //Escribo tres espacios por cada número de filas
+                for (int l = 0; l < filas.Length; l++)
                 {
                     Console.Write(" ");
                 }
-                if (longitudF % 2 == 0)
-                {
-                    if (longitudF > 5)
-                    {
-                        for (int i = 0; i < longitudF - 1; i++)
-                            Console.Write("  |");
-                    }
-                    else
-                    {
-                        for (int i = 0; i <= longitudF ; i++)
-                            Console.Write("  |");
-                    }
-                    
-                }
-                else
-                {
-                    for (int q = 0; q < longitudF; q++)
-                        Console.Write("  |");
-                }
-                
 
-                Console.Write("|");
+                Console.Write("||");
                 //Escribo el interior de la matriz de resultados
                 for (int r = 0; r < resultadosUsuario.GetLength(1); r++)
                 {
@@ -344,9 +321,9 @@ namespace Nonogramas
                 //Si no es la última fila lo escribe normal
                 if (p != solucion.GetLength(0) - 1)
                 {
-                    if (longitudF % 2 == 0)
+                    if (longitudF % 2 == 0 && dim %2 ==0)
                     {
-                        if (longitudF > 5)
+                        if (longitudF < 5)
                         {
                             //Escribo tres - por cada número de filas para las indicaciones de las filas 
                             for (int l = 0; l < longitudF-1; l++)
@@ -362,6 +339,26 @@ namespace Nonogramas
                                 Console.Write("---");
                             }
                         }
+                    }
+                    else if (longitudF % 2 == 0 && dim % 2 != 0)
+                    {
+                        if (longitudF > 5)
+                        {
+                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
+                            for (int l = 0; l < longitudF - 1; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
+                        else
+                        {
+                            //Escribo tres - por cada número de filas para las indicaciones de las filas 
+                            for (int l = 0; l <= longitudF; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
+                       
                     }
                     else
                     {
@@ -393,7 +390,24 @@ namespace Nonogramas
                 {
                     //En la última fila cierro el tablero
                     //Primero la separación para el dibujo de la info de las filas
-                    if (longitudF % 2 == 0)
+                    if (longitudF % 2 == 0 && dim % 2 == 0)
+                    {
+                        if (longitudF < 5)
+                        {
+                            for (int l = 0; l < longitudF-1; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
+                        else
+                        {
+                            for (int l = 0; l <= longitudF; l++)
+                            {
+                                Console.Write("---");
+                            }
+                        }
+                    }
+                    else if(longitudF % 2 == 0 && dim % 2 != 0)
                     {
                         if (longitudF > 5)
                         {
@@ -410,7 +424,7 @@ namespace Nonogramas
                             }
                         }
                     }
-                    else
+                    else 
                     {
                         for (int l = 0; l < longitudF; l++)
                         {
@@ -486,7 +500,7 @@ namespace Nonogramas
                 Console.SetCursorPosition(x, y);
             }
 
-
+            Console.ForegroundColor = ConsoleColor.Black;
             Console.SetCursorPosition(0, 2 * dim + 10);
             Console.BackgroundColor = ConsoleColor.DarkYellow;
             Console.Write(" A ");
@@ -538,6 +552,7 @@ namespace Nonogramas
             }
             Console.WriteLine("Pulsa 'q' para salir del juego");
         }
+       
         //Método que comprueba si la matriz que ha introducido el usuario es correcta
         public bool Compara(out int i)
         {
