@@ -21,7 +21,7 @@ namespace Nonogramas
                 nivel += ".txt";
                 Tablero tab = new Tablero(nivel);//crea el puzle leyendo del archivo lo que se le pide
                 //Número inicial de comprobaciones del usuario; se resetea para cada puzle
-                int comprobaciones = 4;
+                int comprobaciones = 100;
                 //Dibujo inicial del tablero
                 tab.Dibujo(comprobaciones);
 
@@ -99,25 +99,12 @@ namespace Nonogramas
             string aux = "";
             nivel = "";
             Console.WriteLine("Elige un puzle");
-            InputMenu(out aux, ref nivel, "B", "C", "¿Blanco y negro o a color? [B/C]: ");
-            InputMenu(out aux, ref nivel, "10", "15", "Dimensión del puzle [10/15]: ");
+            InputMenu(out aux, ref nivel, "B", "C","D", "¿Blanco y negro o a color? [B/C]: ");
+            InputMenu(out aux, ref nivel, "10", "15","20", "Dimensión del puzle [10/15/20]: ");
+            InputMenu(out aux, ref nivel, "1", "2","c", "Elige un nivel[1/2]: ");
             
-            if (aux == "10")
-            {
-                InputMenu(out aux, ref nivel, "1", "2", "Elige un nivel[1/2]: ");
-            }
-            else
-            {
-                Console.Write("Elige un nivel [1/2/3]: ");
-                do
-                {
-                    aux = Console.ReadLine();
-
-                } while (aux != "1" && aux != "2" && aux != "3");
-                nivel += aux;
-            }
         }
-        static void InputMenu(out string aux, ref string nivel, string lim1, string lim2,  string texto)
+        static void InputMenu(out string aux, ref string nivel, string lim1, string lim2, string lim3 , string texto)
         {
             
             do
@@ -125,7 +112,7 @@ namespace Nonogramas
                 Console.Write(texto);
                 aux = Console.ReadLine().ToUpper();
 
-            } while (aux != lim1 && aux != lim2);
+            } while (aux != lim1 && aux != lim2 && aux !=lim3);
             nivel += aux;
         }
 
