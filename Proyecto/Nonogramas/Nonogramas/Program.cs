@@ -109,7 +109,7 @@ namespace Nonogramas
             Console.Clear();
             string aux = "";
             nivel = "";
-            Console.Write("¿Quieres cargar un archivo propio o uno por defecto? [P/D] :");
+            Console.Write("¿Quieres cargar un archivo propio o uno por defecto? [P/D]: ");
             aux = Console.ReadLine().ToUpper();
             if (aux == "P")
             {
