@@ -8,20 +8,26 @@ namespace Nonogramas
         {
             //Nivel que escoge el usuario
             string nivel;
+
             //Variable que contendrá la input de usuario
             string mov="";
+
             //Variables para la posición del cursor
             int posX, posY;
            
 
             int filaError;//indica la fila del error si hay
+
             while(mov != "q")
             {
                 Menu(out nivel);
                 nivel += ".txt";
                 Tablero tab = new Tablero(nivel);//crea el puzle leyendo del archivo lo que se le pide
-                //Número inicial de comprobaciones del usuario; se resetea para cada puzle
-                int comprobaciones = 100;
+
+                
+                //Número inicial de comprobaciones del usuario; se resetea para cada puzle depende del tamaño del mismo
+                int comprobaciones= tab.dim % 2;
+
                 //Dibujo inicial del tablero
                 tab.Dibujo(comprobaciones);
 
@@ -29,15 +35,19 @@ namespace Nonogramas
                 posX = 3* tab.longitudF + 3;
                 posY = 2 * tab.longitudC;
 
+                //Coloca el cursor en la primera casilla del tablero
                 Console.SetCursorPosition(posX, posY);
 
-                //En cada vuelta del bucle comprueba si el puzle está completo y bien
+                //En cada vuelta del bucle comprueba si el puzle está completo y bien y si el jugador ha pulsado la tecla para salir
                 while (!tab.Completo()&&mov!="q")
                 {
                     LeeInput(out mov);//Lee la input del usuario
+
                     tab.Mueve(mov, ref posX, ref posY);//Mueve el cursor si el usuario lo pide
+
                     tab.MeteValor(posX, posY, mov);//Mete el valor que el usuario ponga
-                                                   //El usuario solo tiene 4 opciones para comprobar si tiene errores
+
+                    //El usuario solo tiene un número limitado de opciones para comprobar si tiene errores
                     if (mov == "p" && comprobaciones > 0)
                     {
                         //resta uno a las comprobaciones que quedan
@@ -50,6 +60,7 @@ namespace Nonogramas
                 }
                 //pequeño retardo para que el usuario vea lo que ha hecho
                 System.Threading.Thread.Sleep(1000);
+
                 Console.SetCursorPosition(0, 4 * tab.dim);
                 Console.Write("Pulsa 'enter' para hacer otro puzle o 'q' para salir :) ");
                 LeeInput(out mov);
@@ -98,11 +109,20 @@ namespace Nonogramas
             Console.Clear();
             string aux = "";
             nivel = "";
-            Console.WriteLine("Elige un puzle");
-            InputMenu(out aux, ref nivel, "B", "C","D", "¿Blanco y negro o a color? [B/C]: ");
-            InputMenu(out aux, ref nivel, "10", "15","20", "Dimensión del puzle [10/15/20]: ");
-            InputMenu(out aux, ref nivel, "1", "2","c", "Elige un nivel[1/2]: ");
-            
+            Console.Write("¿Quieres cargar un archivo propio o uno por defecto? [P/D] :");
+            aux = Console.ReadLine().ToUpper();
+            if (aux == "P")
+            {
+                Console.Write("Escribe el nombre de tu puzle: ");
+                nivel = Console.ReadLine();
+            }
+            else
+            {
+                Console.WriteLine("Elige un puzle");
+                InputMenu(out aux, ref nivel, "B", "C", "D", "¿Blanco y negro o a color? [B/C]: ");
+                InputMenu(out aux, ref nivel, "10", "15", "20", "Dimensión del puzle [10/15/20]: ");
+                InputMenu(out aux, ref nivel, "1", "2", "c", "Elige un nivel[1/2]: ");
+            }            
         }
         static void InputMenu(out string aux, ref string nivel, string lim1, string lim2, string lim3 , string texto)
         {
