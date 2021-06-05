@@ -106,6 +106,7 @@ namespace Nonogramas
         //Menú de juego
         static void Menu(out string nivel)
         {
+            Console.ResetColor();
             Console.Clear();
             string aux = "";
             nivel = "";

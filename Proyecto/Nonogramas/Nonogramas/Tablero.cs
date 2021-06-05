@@ -17,7 +17,7 @@ namespace Nonogramas
         //Números que determina el tamaño de la lista más larga en columnas y en filas
         public int longitudF = 0;
         public int longitudC = 0;
-
+            
         //dimensión del puzle
         public int dim;
 
@@ -32,16 +32,14 @@ namespace Nonogramas
         {
             //Creo el lector de niveles
             StreamReader lectorNivel = new StreamReader(file);
-
-            //establezco la dimensión del tablero
-            dim = int.Parse(lectorNivel.ReadLine());
-
             string leeLineas = "";//lector de las líneas
-
             string info = "";//info que va leyendo de filas y columnas
 
+            //establezco la dimensión del tablero
+           // dim = int.Parse(lectorNivel.ReadLine());
+
             //va leyendo hasta la separación entre filas y columnas
-            while (leeLineas != ";")
+           /*while (leeLineas != ";")
             {
                 //Sustituye los espacios por comas para que sea fácil luego dividir el string
                 leeLineas = lectorNivel.ReadLine().Replace(" ", ",").Trim();
@@ -202,7 +200,7 @@ namespace Nonogramas
             }
 
             //Reseteo la variable info
-            info = "";
+            info = "";*/
             //leo la información de la matriz de soluciones
             do
             {
@@ -217,9 +215,12 @@ namespace Nonogramas
             //divido el string
             string[] matrizNivel = info.Split(";");
 
+            dim = matrizNivel.Length -1;
+
             //establezco el tamaño de la matriz según la info del principio del archivo
             solucion = new int[dim, dim];
-
+            filas = new Lista[dim];
+            columnas = new Lista[dim];
             //relleno la matriz con la info de filas
             for (int i = 0; i < solucion.GetLength(0); i++)
             {
@@ -238,6 +239,128 @@ namespace Nonogramas
             //Cierro el lector
             lectorNivel.Close();
 
+            //Variables auxiliares para almacenar los datos y las cantidades
+            int cantidad=0;
+            string aux3="";
+            string infoEntera="";
+            string [] valoresFilas;
+            char valor= ' ';
+            //Saco la info de filas y columnas por la matriz
+            for (int i = 0; i < dim; i++)
+            {
+                for (int j = 0; j < dim; j++)
+                {
+                    if (solucion[i, j] != 0)
+                    {
+                        
+                        if(j > 0 && solucion[i,j]!=solucion[i,j-1])//Quitar j>0
+                        {
+                            if (cantidad > 0)
+                            {
+                                if (cantidad < 10)
+                                {
+                                    aux3 += "0";
+                                }
+
+                                aux3 += cantidad.ToString() + valor.ToString() + " ";
+                            }
+                            valor = DevuelveLetra(solucion[i,j]);
+                            cantidad = 1;
+                            
+                        }
+                        else if (j == 0)
+                        {
+                            valor = DevuelveLetra(solucion[i, j]);
+                            cantidad = 1;
+                        }
+                        else
+                        {
+                            cantidad++;
+                        }
+                        if (j == solucion.GetLength(1) - 1)
+                        {
+                            if (cantidad < 10)
+                            {
+                                aux3 += "0";
+                            }
+
+                            aux3 += cantidad.ToString() + valor.ToString() + " ";
+                        }
+                        
+                    }
+                }
+                
+                aux3.TrimEnd(' ');
+                infoEntera += aux3 + ";";
+                aux3 = "";
+                cantidad = 0;
+            }
+            valoresFilas = infoEntera.Split(";");
+
+            for (int i = 0; i < valoresFilas.Length; i++)
+            {
+                //string auxiliar
+                string aux = valoresFilas[i];
+
+                //array para guardar cada número de cada fila de arrayNivel
+                //Separa el string auxiliar en cada elemento por las comas
+                string[] aux2 = aux.Split(",");
+
+                Lista lst = new Lista();
+
+                int lng = 0;//longitud de las listas
+
+                //Recorre toda la información para meterla en cada lista del array
+                for (int j = 0; j < aux2.Length; j++)
+                {
+
+                    //divido el string para quedarme solo con la info del número
+                    string temp = aux2[j].Substring(0, 2);
+
+                    int temp2 = int.Parse(temp);
+
+                    //vuelvo a dividir el string para tener la info del color
+                    temp = aux2[j].Substring(2, 1);
+
+                    ConsoleColor color;//guarda el color correspondiente
+
+                    //asigna el color según el código que tengo preparado
+                    switch (temp)
+                    {
+                        case "a": color = ConsoleColor.DarkYellow; break;
+                        case "b": color = ConsoleColor.Blue; break;
+                        case "c": color = ConsoleColor.Red; break;
+                        case "d": color = ConsoleColor.Green; break;
+                        case "e": color = ConsoleColor.Gray; break;
+                        case "f": color = ConsoleColor.Cyan; break;
+                        case "g": color = ConsoleColor.DarkBlue; break;
+                        case "h": color = ConsoleColor.DarkCyan; break;
+                        case "i": color = ConsoleColor.DarkGreen; break;
+                        case "j": color = ConsoleColor.DarkGray; break;
+                        case "k": color = ConsoleColor.DarkMagenta; break;
+                        case "l": color = ConsoleColor.DarkRed; break;
+                        default: color = ConsoleColor.Black; break;
+                    }
+
+                    //variable para meter los pares en la lista
+                    Lista.Pares par = new Lista.Pares
+                    {
+                        color = color,
+                        valor = temp2
+                    };
+
+                    lst.InsertaPar(par);
+
+                    //Va contabilizando la longitud de la lista
+                    lng++;
+                }
+                //Voy guardando la longitud máxima de la lista que necesito para el dibujo
+                if (lng > longitudF) longitudF = lng;
+
+                //Guardo la lista en un array de listas
+                filas[i] = lst;
+            }
+
             //dimensiono la matriz de resultados
             resultadosUsuario = new int[dim, dim];
 
@@ -246,6 +369,28 @@ namespace Nonogramas
             {
                 for (int j = 0; j < resultadosUsuario.GetLength(1); j++) resultadosUsuario[i, j] = 0;
             }
+        }
+        //método que devuelve una letra en función del número dado
+        static char DevuelveLetra(int num)
+        {
+            char letra;
+            switch (num)
+            {
+                case 2: letra = 'a'; break;
+                case 3: letra = 'b'; break;
+                case 4: letra = 'c'; break;
+                case 5: letra = 'd'; break;
+                case 6: letra = 'e'; break;
+                case 7: letra = 'f'; break;
+                case 8: letra = 'g'; break;
+                case 9: letra = 'h'; break;
+                case 10: letra = 'i'; break;
+                case 11: letra = 'j'; break;
+                case 12: letra = 'k'; break;
+                case 13: letra = 'l'; break;
+                default: letra = 'n'; break;
+            }
+            return letra;
         }
 
         //Método que dibuja el tablero
