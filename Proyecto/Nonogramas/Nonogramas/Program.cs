@@ -60,9 +60,6 @@ namespace Nonogramas
                 }
                 //pequeño retardo para que el usuario vea lo que ha hecho
                 System.Threading.Thread.Sleep(1000);
-
-                Console.SetCursorPosition(0, 4 * tab.dim);
-                Console.Write("Pulsa 'enter' para hacer otro puzle o 'q' para salir :) ");
                 LeeInput(out mov);
             }
 
@@ -97,7 +94,7 @@ namespace Nonogramas
                     case "Spacebar": c = "1"; break;
                     case "Enter": c = " "; break;
                     case "P": c = "p"; break;//comprueba tablero
-                    case "Q": c = "q"; break;//sale del juego
+                    case "Q": c = "q"; break;//sale del puzle
                     default: break;
                 }
             }
@@ -106,17 +103,20 @@ namespace Nonogramas
         //Menú de juego
         static void Menu(out string nivel)
         {
+            //Resetea el color y limpia el tablero
             Console.ResetColor();
             Console.Clear();
-            string aux = "";
+            string aux;//para saber si el archivo es propio del usuario o no
             nivel = "";
             Console.Write("¿Quieres cargar un archivo propio o uno por defecto? [P/D]: ");
             aux = Console.ReadLine().ToUpper();
+            //Si es un archivo del usuario simplemente pide el nombre del archivo
             if (aux == "P")
             {
                 Console.Write("Escribe el nombre de tu puzle: ");
                 nivel = Console.ReadLine();
             }
+            //si es un archivo por defecto pregunta el tipo de archivo que se quiere y genera el nombre correspondiente según las respuestas del usuario
             else
             {
                 Console.WriteLine("Elige un puzle");
@@ -125,15 +125,18 @@ namespace Nonogramas
                 InputMenu(out aux, ref nivel, "1", "2", "c", "Elige un nivel[1/2]: ");
             }            
         }
+        //Método que le la input del usuario y lo añade al string de nombre del texto
         static void InputMenu(out string aux, ref string nivel, string lim1, string lim2, string lim3 , string texto)
         {
             
             do
             {
+                //lee lo que escriba el usuario y lo repite mientras no sea uno de las input esperadas
                 Console.Write(texto);
                 aux = Console.ReadLine().ToUpper();
 
             } while (aux != lim1 && aux != lim2 && aux !=lim3);
+            //añade la entrada correspondiente al string de nombre del nivel
             nivel += aux;
         }
 

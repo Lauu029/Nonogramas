@@ -32,7 +32,9 @@ namespace Nonogramas
         {
             //Creo el lector de niveles
             StreamReader lectorNivel = new StreamReader(file);
-            string leeLineas = "";//lector de las líneas
+
+            string leeLineas;//lector de las líneas
+
             string info = "";//info que va leyendo de filas y columnas
 
             
@@ -50,12 +52,17 @@ namespace Nonogramas
             //divido el string
             string[] matrizNivel = info.Split(";");
 
+            //asigno la dimensión por la cantidad de filas que haguardado
             dim = matrizNivel.Length -1;
 
-            //establezco el tamaño de la matriz según la info del principio del archivo
+            //Cierro el lector
+            lectorNivel.Close();
+
+            //establezco el tamaño de la matriz y de los arrays de info
             solucion = new int[dim, dim];
             filas = new Lista[dim];
             columnas = new Lista[dim];
+
             //relleno la matriz con la info de filas
             for (int i = 0; i < solucion.GetLength(0); i++)
             {
@@ -71,26 +78,29 @@ namespace Nonogramas
                     solucion[i, j] = int.Parse(aux2[j]);
                 }
             }
-            //Cierro el lector
-            lectorNivel.Close();
+            
 
             //Variables auxiliares para almacenar los datos y las cantidades
             int cantidad=0;
-            string aux3="";
-            string infoEntera="";
-            string [] valoresFilas;
+            string aux3="";//guarda la info de cada fila
+            string infoEntera="";//guarda la info completa
+            string [] valoresFilas;//almacena lo guardado en un array
             char valor= ' ';
-            bool flag = false;
-            //Saco la info de filas y columnas por la matriz
+            bool flag = false;//flag necesario para el condicional
+
+            //Saco la info de filas por la matriz
             for (int i = 0; i < dim; i++)
             {
                 for (int j = 0; j < dim; j++)
                 {
+                    //Miientras haya 0 no entra, una vez encuentra el primer 0 entra siempre
                     if (solucion[i, j] != 0 || flag)
                     {
                         flag = true;
-                        if(j > 0 && solucion[i,j]!=solucion[i,j-1] && solucion[i,j]!=0)//Quitar j>0
+                        //Comprueba si el número es diferente al anterior, que no sea 0 y no está en la primera posición
+                        if(j > 0 && solucion[i,j]!=solucion[i,j-1] && solucion[i,j]!=0)
                         {
+                            //si ha almacenado alguna cantidad de algún número lo escribe
                             if (cantidad > 0)
                             {
                                 if (cantidad < 10)
@@ -100,19 +110,24 @@ namespace Nonogramas
 
                                 aux3 += cantidad.ToString() + valor.ToString() + " ";
                             }
+                            //establece el valor de color según el número asignado en la matriz
                             valor = DevuelveLetra(solucion[i,j]);
+                            //inicia el contador de cantidad
                             cantidad = 1;
                             
                         }
+                        //comprueba para la primera posición
                         else if (j == 0)
                         {
                             valor = DevuelveLetra(solucion[i, j]);
                             cantidad = 1;
                         }
+                        //aumenta el contador si el valor es igual al anterior y este no es 0
                         else if (solucion[i,j]!=0)
                         {
                             cantidad++;
                         }
+                        //para la última posición de la fila guarda lo que haya leído
                         if (j == solucion.GetLength(1) - 1)
                         {
                             if (cantidad < 10)
@@ -126,13 +141,15 @@ namespace Nonogramas
                     }
                     
                 }
-                
+                //Borra el último espacio almacenado
                 aux3.TrimEnd(' ');
                 infoEntera += aux3 + ";";
+                //resetea las variables
                 aux3 = "";
                 cantidad = 0;
                 flag = false;
             }
+            //divide las filas leídas en un array
             valoresFilas = infoEntera.Split(";");
 
             //relleno la matriz con la info de columnas
@@ -151,10 +168,12 @@ namespace Nonogramas
 
                 for (int j = 0; j < aux2.Length-1; j++)
                 {
+                    //los dos primeros caracteres representan la cantidad
                     string temp = aux2[j].Substring(0, 2);
 
                     int temp2 = int.Parse(temp);
 
+                    //El último caracter establece el color
                     temp = aux2[j].Substring(2, 1);
 
                     ConsoleColor color;
@@ -190,15 +209,14 @@ namespace Nonogramas
                 }
                 if (lng > longitudF) longitudF = lng;
 
+                //Mete la lista en la posición indicada del array
                 filas[i] = lst;
             }
 
-            //Variables auxiliares para almacenar los datos y las cantidades
-           
+            //reseteo la variable de info para almacenar lo de las columnas
             infoEntera = "";
-            string[] valoresColumnas;
             
-            //Saco la info de filas y columnas por la matriz
+            //Saco la info de columnas por la matriz
             for (int j = 0; j < dim; j++)
             {
                 for (int i = 0; i < dim; i++)
@@ -250,13 +268,13 @@ namespace Nonogramas
                 cantidad = 0;
                 flag = false;
             }
-            valoresColumnas = infoEntera.Split(";");
+            valoresFilas = infoEntera.Split(";");
 
             //relleno la matriz con la info de columnas
-            for (int i = 0; i < valoresColumnas.Length - 1; i++)
+            for (int i = 0; i < valoresFilas.Length - 1; i++)
             {
                 //string auxiliar
-                string aux = valoresColumnas[i];
+                string aux = valoresFilas[i];
 
                 //array para guardar cada número de cada fila de arrayNivel
                 string[] aux2 = aux.Split(" ");
@@ -322,6 +340,7 @@ namespace Nonogramas
         //método que devuelve una letra en función del número dado
         static char DevuelveLetra(int num)
         {
+            //asigna un valor dependiendo del número que haya en la matriz
             char letra;
             switch (num)
             {
