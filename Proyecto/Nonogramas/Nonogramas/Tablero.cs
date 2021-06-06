@@ -35,172 +35,7 @@ namespace Nonogramas
             string leeLineas = "";//lector de las líneas
             string info = "";//info que va leyendo de filas y columnas
 
-            //establezco la dimensión del tablero
-           // dim = int.Parse(lectorNivel.ReadLine());
-
-            //va leyendo hasta la separación entre filas y columnas
-           /*while (leeLineas != ";")
-            {
-                //Sustituye los espacios por comas para que sea fácil luego dividir el string
-                leeLineas = lectorNivel.ReadLine().Replace(" ", ",").Trim();
-                //para evitar que me meta líneas extra en el string solo añade si no son vacías o las de separación
-                if (leeLineas != ";" && leeLineas != "")
-                    //Meto ; por medio para facilitar luego la separación del string en un array
-                    info += leeLineas + ";";
-            }
-
-            //divido el string
-            string[] arrayNivel = info.Split(";");
-
-            //establezco el tamaño del array de info de filas
-            filas = new Lista[dim];
-
-            //relleno la matriz con la info de filas que va en listas
-            //La longitud es uno menos porque me mete un espacio vacío
-            for (int i = 0; i < arrayNivel.Length - 1; i++)
-            {
-                //string auxiliar
-                string aux = arrayNivel[i];
-
-                //array para guardar cada número de cada fila de arrayNivel
-                //Separa el string auxiliar en cada elemento por las comas
-                string[] aux2 = aux.Split(",");
-
-                Lista lst = new Lista();
-
-                int lng = 0;//longitud de las listas
-
-                //Recorre toda la información para meterla en cada lista del array
-                for (int j = 0; j < aux2.Length; j++)
-                {
-
-                    //divido el string para quedarme solo con la info del número
-                    string temp = aux2[j].Substring(0, 2);
-
-                    int temp2 = int.Parse(temp);
-
-                    //vuelvo a dividir el string para tener la info del color
-                    temp = aux2[j].Substring(2, 1);
-
-                    ConsoleColor color;//guarda el color correspondiente
-
-                    //asigna el color según el código que tengo preparado
-                    switch (temp)
-                    {
-                        case "a": color = ConsoleColor.DarkYellow; break;
-                        case "b": color = ConsoleColor.Blue; break;
-                        case "c": color = ConsoleColor.Red; break;
-                        case "d": color = ConsoleColor.Green; break;
-                        case "e": color = ConsoleColor.Gray; break;
-                        case "f": color = ConsoleColor.Cyan; break;
-                        case "g": color = ConsoleColor.DarkBlue; break;
-                        case "h": color = ConsoleColor.DarkCyan; break;
-                        case "i": color = ConsoleColor.DarkGreen; break;
-                        case "j": color = ConsoleColor.DarkGray; break;
-                        case "k": color = ConsoleColor.DarkMagenta; break;
-                        case "l": color = ConsoleColor.DarkRed; break;
-                        default: color = ConsoleColor.Black; break;
-                    }
-
-                    //variable para meter los pares en la lista
-                    Lista.Pares par = new Lista.Pares
-                    {
-                        color = color,
-                        valor = temp2
-                    };
-
-                    lst.InsertaPar(par);
-
-                    //Va contabilizando la longitud de la lista
-                    lng++;
-                }
-                //Voy guardando la longitud máxima de la lista que necesito para el dibujo
-                if (lng > longitudF) longitudF = lng;
-
-                //Guardo la lista en un array de listas
-                filas[i] = lst;
-            }
-
-            //Reseteo la variable info
-            info = "";
-
-            //Vuelvo a leer igual que con las filas para las columnas
-            do
-            {
-                leeLineas = lectorNivel.ReadLine().Replace(" ", ",");
-
-                if (leeLineas != ";" && leeLineas != "")
-                    info += leeLineas + ";";
-
-
-            } while (leeLineas != ";");
-
-            //divido el string
-            arrayNivel = info.Split(";");
-
-            //establezco el tamaño del array de info de columnas
-            columnas = new Lista[dim];
-
-            //relleno la matriz con la info de columnas
-            for (int i = 0; i < arrayNivel.Length - 1; i++)
-            {
-                //string auxiliar
-                string aux = arrayNivel[i];
-
-                //array para guardar cada número de cada fila de arrayNivel
-                string[] aux2 = aux.Split(",");
-
-                Lista lst = new Lista();
-
-                //variable para contar la longitud de las listas
-                int lng = 0;
-
-                for (int j = 0; j < aux2.Length; j++)
-                {
-                    string temp = aux2[j].Substring(0, 2);
-
-                    int temp2 = int.Parse(temp);
-
-                    temp = aux2[j].Substring(2, 1);
-
-                    ConsoleColor color;
-
-                    //asigna el color según el código que tengo preparado+
-                    switch (temp)
-                    {
-                        case "a": color = ConsoleColor.DarkYellow; break;
-                        case "b": color = ConsoleColor.Blue; break;
-                        case "c": color = ConsoleColor.Red; break;
-                        case "d": color = ConsoleColor.Green; break;
-                        case "e": color = ConsoleColor.Gray; break;
-                        case "f": color = ConsoleColor.Cyan; break;
-                        case "g": color = ConsoleColor.DarkBlue; break;
-                        case "h": color = ConsoleColor.DarkCyan; break;
-                        case "i": color = ConsoleColor.DarkGreen; break;
-                        case "j": color = ConsoleColor.DarkGray; break;
-                        case "k": color = ConsoleColor.DarkMagenta; break;
-                        case "l": color = ConsoleColor.DarkRed; break;
-                        default: color = ConsoleColor.Black; break;
-                    }
-
-                    //variable para meter los pares en la lista
-                    Lista.Pares par = new Lista.Pares
-                    {
-                        color = color,
-                        valor = temp2
-                    };
-
-                    lst.InsertaPar(par);
-
-                    lng++;
-                }
-                if (lng > longitudC) longitudC = lng;
-
-                columnas[i] = lst;
-            }
-
-            //Reseteo la variable info
-            info = "";*/
+            
             //leo la información de la matriz de soluciones
             do
             {
@@ -245,15 +80,16 @@ namespace Nonogramas
             string infoEntera="";
             string [] valoresFilas;
             char valor= ' ';
+            bool flag = false;
             //Saco la info de filas y columnas por la matriz
             for (int i = 0; i < dim; i++)
             {
                 for (int j = 0; j < dim; j++)
                 {
-                    if (solucion[i, j] != 0)
+                    if (solucion[i, j] != 0 || flag)
                     {
-                        
-                        if(j > 0 && solucion[i,j]!=solucion[i,j-1])//Quitar j>0
+                        flag = true;
+                        if(j > 0 && solucion[i,j]!=solucion[i,j-1] && solucion[i,j]!=0)//Quitar j>0
                         {
                             if (cantidad > 0)
                             {
@@ -273,7 +109,7 @@ namespace Nonogramas
                             valor = DevuelveLetra(solucion[i, j]);
                             cantidad = 1;
                         }
-                        else
+                        else if (solucion[i,j]!=0)
                         {
                             cantidad++;
                         }
@@ -288,43 +124,42 @@ namespace Nonogramas
                         }
                         
                     }
+                    
                 }
                 
                 aux3.TrimEnd(' ');
                 infoEntera += aux3 + ";";
                 aux3 = "";
                 cantidad = 0;
+                flag = false;
             }
             valoresFilas = infoEntera.Split(";");
 
-            for (int i = 0; i < valoresFilas.Length; i++)
+            //relleno la matriz con la info de columnas
+            for (int i = 0; i < valoresFilas.Length - 1; i++)
             {
                 //string auxiliar
                 string aux = valoresFilas[i];
 
                 //array para guardar cada número de cada fila de arrayNivel
-                //Separa el string auxiliar en cada elemento por las comas
-                string[] aux2 = aux.Split(",");
+                string[] aux2 = aux.Split(" ");
 
                 Lista lst = new Lista();
 
-                int lng = 0;//longitud de las listas
+                //variable para contar la longitud de las listas
+                int lng = 0;
 
-                //Recorre toda la información para meterla en cada lista del array
-                for (int j = 0; j < aux2.Length; j++)
+                for (int j = 0; j < aux2.Length-1; j++)
                 {
-
-                    //divido el string para quedarme solo con la info del número
                     string temp = aux2[j].Substring(0, 2);
 
                     int temp2 = int.Parse(temp);
 
-                    //vuelvo a dividir el string para tener la info del color
                     temp = aux2[j].Substring(2, 1);
 
-                    ConsoleColor color;//guarda el color correspondiente
+                    ConsoleColor color;
 
-                    //asigna el color según el código que tengo preparado
+                    //asigna el color según el código que tengo preparado+
                     switch (temp)
                     {
                         case "a": color = ConsoleColor.DarkYellow; break;
@@ -351,14 +186,128 @@ namespace Nonogramas
 
                     lst.InsertaPar(par);
 
-                    //Va contabilizando la longitud de la lista
                     lng++;
                 }
-                //Voy guardando la longitud máxima de la lista que necesito para el dibujo
                 if (lng > longitudF) longitudF = lng;
 
-                //Guardo la lista en un array de listas
                 filas[i] = lst;
+            }
+
+            //Variables auxiliares para almacenar los datos y las cantidades
+           
+            infoEntera = "";
+            string[] valoresColumnas;
+            
+            //Saco la info de filas y columnas por la matriz
+            for (int j = 0; j < dim; j++)
+            {
+                for (int i = 0; i < dim; i++)
+                {
+                    if (solucion[i, j] != 0 || flag)
+                    {
+                        flag = true;
+                        if (i > 0 && solucion[i, j] != solucion[i-1, j ] && solucion[i, j] != 0)//Quitar j>0
+                        {
+                            if (cantidad > 0)
+                            {
+                                if (cantidad < 10)
+                                {
+                                    aux3 += "0";
+                                }
+
+                                aux3 += cantidad.ToString() + valor.ToString() + " ";
+                            }
+                            valor = DevuelveLetra(solucion[i, j]);
+                            cantidad = 1;
+
+                        }
+                        else if (i == 0)
+                        {
+                            valor = DevuelveLetra(solucion[i, j]);
+                            cantidad = 1;
+                        }
+                        else if (solucion[i, j] != 0)
+                        {
+                            cantidad++;
+                        }
+                        if (i == solucion.GetLength(1) - 1)
+                        {
+                            if (cantidad < 10)
+                            {
+                                aux3 += "0";
+                            }
+
+                            aux3 += cantidad.ToString() + valor.ToString() + " ";
+                        }
+
+                    }
+
+                }
+
+                aux3.TrimEnd(' ');
+                infoEntera += aux3 + ";";
+                aux3 = "";
+                cantidad = 0;
+                flag = false;
+            }
+            valoresColumnas = infoEntera.Split(";");
+
+            //relleno la matriz con la info de columnas
+            for (int i = 0; i < valoresColumnas.Length - 1; i++)
+            {
+                //string auxiliar
+                string aux = valoresColumnas[i];
+
+                //array para guardar cada número de cada fila de arrayNivel
+                string[] aux2 = aux.Split(" ");
+
+                Lista lst = new Lista();
+
+                //variable para contar la longitud de las listas
+                int lng = 0;
+
+                for (int j = 0; j < aux2.Length - 1; j++)
+                {
+                    string temp = aux2[j].Substring(0, 2);
+
+                    int temp2 = int.Parse(temp);
+
+                    temp = aux2[j].Substring(2, 1);
+
+                    ConsoleColor color;
+
+                    //asigna el color según el código que tengo preparado+
+                    switch (temp)
+                    {
+                        case "a": color = ConsoleColor.DarkYellow; break;
+                        case "b": color = ConsoleColor.Blue; break;
+                        case "c": color = ConsoleColor.Red; break;
+                        case "d": color = ConsoleColor.Green; break;
+                        case "e": color = ConsoleColor.Gray; break;
+                        case "f": color = ConsoleColor.Cyan; break;
+                        case "g": color = ConsoleColor.DarkBlue; break;
+                        case "h": color = ConsoleColor.DarkCyan; break;
+                        case "i": color = ConsoleColor.DarkGreen; break;
+                        case "j": color = ConsoleColor.DarkGray; break;
+                        case "k": color = ConsoleColor.DarkMagenta; break;
+                        case "l": color = ConsoleColor.DarkRed; break;
+                        default: color = ConsoleColor.Black; break;
+                    }
+
+                    //variable para meter los pares en la lista
+                    Lista.Pares par = new Lista.Pares
+                    {
+                        color = color,
+                        valor = temp2
+                    };
+
+                    lst.InsertaPar(par);
+
+                    lng++;
+                }
+                if (lng > longitudC) longitudC = lng;
+
+                columnas[i] = lst;
             }
 
             //dimensiono la matriz de resultados
