@@ -6,15 +6,11 @@ namespace Nonogramas
     {
         static void Main(string[] args)
         {
-            //Nivel que escoge el usuario
-            string nivel;
+            string nivel;//Nivel que escoge el usuario
 
-            //Variable que contendrá la input de usuario
-            string mov="";
+            string mov="";//Input de usuario
 
-            //Variables para la posición del cursor
-            int posX, posY;
-           
+            int posX, posY;//Posición del cursor
 
             int filaError;//indica la fila del error si hay
 
@@ -24,9 +20,8 @@ namespace Nonogramas
                 nivel += ".txt";
                 Tablero tab = new Tablero(nivel);//crea el puzle leyendo del archivo lo que se le pide
 
-                
                 //Número inicial de comprobaciones del usuario; se resetea para cada puzle depende del tamaño del mismo
-                int comprobaciones= tab.dim % 2;
+                int comprobaciones= 4;
 
                 //Dibujo inicial del tablero
                 tab.Dibujo(comprobaciones);
@@ -39,23 +34,17 @@ namespace Nonogramas
                 Console.SetCursorPosition(posX, posY);
 
                 //En cada vuelta del bucle comprueba si el puzle está completo y bien y si el jugador ha pulsado la tecla para salir
-                while (!tab.Completo()&&mov!="q")
+                while (!tab.Completo() && mov!="q")
                 {
                     LeeInput(out mov);//Lee la input del usuario
-
                     tab.Mueve(mov, ref posX, ref posY);//Mueve el cursor si el usuario lo pide
-
                     tab.MeteValor(posX, posY, mov);//Mete el valor que el usuario ponga
-
                     //El usuario solo tiene un número limitado de opciones para comprobar si tiene errores
                     if (mov == "p" && comprobaciones > 0)
                     {
-                        //resta uno a las comprobaciones que quedan
-                        comprobaciones--;
-                        //Comparo las matrices
-                        tab.Compara(out filaError);
-                        //Vuelvo a dibujar el tablero
-                        tab.Dibujo(comprobaciones);
+                        comprobaciones--;//resta uno a las comprobaciones que quedan
+                        tab.Compara(out filaError);//Comparo las matrices
+                        tab.Dibujo(comprobaciones);//Vuelvo a dibujar el tablero
                     }
                 }
                 //pequeño retardo para que el usuario vea lo que ha hecho
